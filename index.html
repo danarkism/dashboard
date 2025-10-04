@@ -14,7 +14,10 @@
             font-family: 'Inter', sans-serif;
             background-color: #0d1117;
             color: #e6edf3;
-            overflow: hidden; /* Hide scrollbars for presentation feel */
+        }
+
+        body.presentation-mode {
+             overflow: hidden; /* Hide scrollbars for presentation feel */
         }
         
         #background-gradient {
@@ -113,7 +116,7 @@
         }
     </style>
 </head>
-<body class="relative">
+<body class="relative presentation-mode">
     
     <div id="background-gradient"></div>
 
@@ -232,7 +235,7 @@
         </div>
     </div>
 
-    <div id="full-dashboard-container" class="max-w-7xl mx-auto relative z-10" style="display: none;">
+    <div id="full-dashboard-container" class="max-w-7xl mx-auto relative z-10 pb-12" style="display: none;">
         <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold main-title">Dashboard de Encuesta de Mercado</h1>
@@ -363,6 +366,7 @@
 
         function showFullDashboard() {
             document.getElementById('presentation-container').style.display = 'none';
+            document.body.classList.remove('presentation-mode');
             document.getElementById('full-dashboard-container').style.display = 'block';
             renderAllCharts();
         }
