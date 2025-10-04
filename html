@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación de Dashboard: Ama de Llaves</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .main-title {
+            color: rgb(59, 130, 246);
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1);
+        }
+        .kpi-value {
+            color: rgb(59, 130, 246);
+        }
+        .chart-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .chart-title {
+            color: #044680;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            position: relative;
+            z-index: 10;
+        }
+        .impact-text {
+            color: #1e293b;
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .chart-container-slide {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Animation styles */
+        .animated-module {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-module.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animated-module.delay-1 {
+            transition-delay: 0.2s;
+        }
+        
+        /* Bubble background animation */
+        #bubbles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -150px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation-name: rise;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8 relative">
+    
+    <div id="bubbles-bg"></div>
+
+    <div id="presentation-container">
+        <!-- Slide Controller -->
+        <div id="slide-0" class="slide">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold main-title">Validación del Modelo de Negocio</h1>
+                <p class="text-slate-600 mt-4 text-2xl font-medium">Ama de Llaves</p>
+                <p class="text-slate-500 mt-2 text-lg">Un análisis basado en 238 encuestas de mercado.</p>
+                <button onclick="nextSlide()" class="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
+                    Comenzar Presentación
+                </button>
+            </div>
+        </div>
+
+        <!-- Slides de Gráficas -->
+        <div id="slide-1" class="slide hidden">
+            <p class="impact-text animated-module">Existe un gigante dormido. Casi la mitad del mercado no contrata servicios de limpieza, pero está <span class="text-blue-500">activamente buscándolos.</span></p>
+            <div class="chart-container-slide animated-module delay-1">
+                <div class="chart-card xl:col-span-1 h-[26rem]">
+                    <h2 class="chart-title">1. Situación Actual del Servicio de Limpieza</h2>
+                    <canvas id="situacionActualChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-2" class="slide hidden">
+            <p class="impact-text animated-module">El problema no es la limpieza. Es el miedo. La principal barrera para el 50% de los clientes es una pregunta: <span class="text-blue-500">¿En quién puedo confiar?</span></p>
+            <div class="chart-container-slide animated-module delay-1">
+                 <div class="chart-card xl:col-span-2 h-[26rem]">
+                    <h2 class="chart-title">2. Principal Preocupación al Contratar</h2>
+                    <canvas id="preocupacionChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div id="slide-3" class="slide hidden">
+            <p class="impact-text animated-module">Los clientes no compran un servicio, <span class="text-blue-500">compran tranquilidad.</span> La verificación de antecedentes supera por mucho al precio como factor de decisión.</p>
+            <div class="chart-container-slide animated-module delay-1">
+                <div class="chart-card xl:col-span-3 h-[26rem]">
+                    <h2 class="chart-title">3. Factores Clave en la Decisión</h2>
+                    <canvas id="factoresChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-4" class="slide hidden">
+            <p class="impact-text animated-module">La certificación no es un 'extra', <span class="text-blue-500">es el requisito fundamental.</span> La demanda por profesionales verificados es abrumadora.</p>
+            <div class="chart-container-slide animated-module delay-1">
+                 <div class="chart-card xl:col-span-2 h-[28rem]">
+                    <h2 class="chart-title">4. Importancia de la Certificación del Profesional (1-10)</h2>
+                    <canvas id="certificacionChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-5" class="slide hidden">
+            <p class="impact-text animated-module">Cuando la confianza está garantizada, la intención de compra se dispara. El mercado <span class="text-blue-500">está listo para actuar.</span></p>
+            <div class="chart-container-slide animated-module delay-1">
+                 <div class="chart-card xl:col-span-2 h-[28rem]">
+                    <h2 class="chart-title">5. Probabilidad de Uso del Servicio (1-10)</h2>
+                    <canvas id="probabilidadChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-6" class="slide hidden">
+            <p class="impact-text animated-module">La confianza tiene un precio, y el mercado está dispuesto a pagarlo. Un <span class="text-blue-500">70% pagaría una tarifa premium</span> por un servicio seguro y de calidad.</p>
+            <div class="chart-container-slide animated-module delay-1">
+                 <div class="chart-card xl:col-span-2 h-[28rem]">
+                    <h2 class="chart-title">6. Disposición a Pagar por Hora (MXN)</h2>
+                    <canvas id="pagoChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div id="slide-7" class="slide hidden">
+            <p class="impact-text animated-module">La conveniencia es la nueva lealtad. La gran mayoría quiere la solución <span class="text-blue-500">en la palma de su mano.</span></p>
+            <div class="chart-container-slide animated-module delay-1">
+                 <div class="chart-card xl:col-span-1 h-[26rem]">
+                    <h2 class="chart-title">8. Canal Preferido para Gestionar Servicios</h2>
+                    <canvas id="canalChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-8" class="slide hidden">
+            <p class="impact-text animated-module">Nuestro cliente no es un nicho. Es la fuerza económica emergente: profesionales que <span class="text-blue-500">valoran su tiempo más que su dinero.</span></p>
+            <div class="chart-container-slide grid md:grid-cols-2 gap-6">
+                 <div class="chart-card h-[26rem] animated-module delay-1">
+                    <h2 class="chart-title">10. Rango de Edad</h2>
+                    <canvas id="edadChart_slide"></canvas>
+                </div>
+                <div class="chart-card h-[26rem] animated-module delay-1" style="transition-delay: 0.4s;">
+                    <h2 class="chart-title">12. Ingreso Mensual del Hogar</h2>
+                    <canvas id="ingresoChart_slide"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-9" class="slide hidden">
+            <p class="impact-text animated-module">Estos no son solo datos. Son la confirmación de una oportunidad de mercado clara. <span class="text-blue-500">Ahora, veamos el panorama completo.</span></p>
+             <div class="text-center animated-module delay-1">
+                <button onclick="showFullDashboard()" class="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">
+                    Ver Dashboard Completo
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div id="navigation" class="fixed bottom-8 left-1/2 -translate-x-1/2 flex gap-4 hidden z-20">
+            <button onclick="prevSlide()" class="bg-white hover:bg-slate-100 text-slate-700 font-bold py-2 px-6 rounded-full shadow-md transition-transform transform hover:scale-105">Anterior</button>
+            <button onclick="nextSlide()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-md transition-transform transform hover:scale-105">Siguiente</button>
+        </div>
+    </div>
+
+    <div id="full-dashboard-container" class="max-w-7xl mx-auto hidden relative z-10">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold main-title">Dashboard de Encuesta de Mercado</h1>
+            <p class="text-slate-600 mt-2 text-lg">Validación del Modelo de Negocio "Ama de Llaves" (Muestra: 238 Personas)</p>
+        </header>
+
+        <!-- KPIs Principales -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-lg font-semibold text-slate-700">Principal Preocupación</h3>
+                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">Confianza</p>
+                <p class="text-slate-500 text-sm mt-1">(50% de los encuestados)</p>
+            </div>
+            <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-lg font-semibold text-slate-700">Importancia de Certificación</h3>
+                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">8.9 / 10</p>
+                <p class="text-slate-500 text-sm mt-1">(Calificación Promedio)</p>
+            </div>
+            <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-lg font-semibold text-slate-700">Probabilidad de Uso</h3>
+                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">8.7 / 10</p>
+                <p class="text-slate-500 text-sm mt-1">(Calificación Promedio)</p>
+            </div>
+            <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-lg font-semibold text-slate-700">Pago por Hora Premium</h3>
+                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">70%</p>
+                <p class="text-slate-500 text-sm mt-1">(Dispuestos a pagar > $200/hr)</p>
+            </div>
+        </section>
+
+        <!-- Grid de Gráficas -->
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">1. Situación Actual</h2><canvas id="situacionActualChart"></canvas></div>
+            <div class="chart-card lg:col-span-2 h-[28rem]"><h2 class="chart-title">2. Principal Preocupación</h2><canvas id="preocupacionChart"></canvas></div>
+            <div class="chart-card lg:col-span-3 h-[28rem]"><h2 class="chart-title">3. Factores Importantes</h2><canvas id="factoresChart"></canvas></div>
+            <div class="chart-card lg:col-span-2 h-[28rem]"><h2 class="chart-title">4. Importancia de la Certificación</h2><canvas id="certificacionChart"></canvas></div>
+            <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">5. Probabilidad de Uso</h2><canvas id="probabilidadChart"></canvas></div>
+            <div class="chart-card lg:col-span-2 h-[28rem]"><h2 class="chart-title">6. Disposición a Pagar</h2><canvas id="pagoChart"></canvas></div>
+            <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">7. Frecuencia Ideal</h2><canvas id="frecuenciaChart"></canvas></div>
+            <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">8. Canal Preferido</h2><canvas id="canalChart"></canvas></div>
+            <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">9. Ciudad de Residencia</h2><canvas id="ciudadChart"></canvas></div>
+            <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">10. Rango de Edad</h2><canvas id="edadChart"></canvas></div>
+            <div class="chart-card lg:col-span-2 h-[28rem]"><h2 class="chart-title">11. Ocupación Principal</h2><canvas id="ocupacionChart"></canvas></div>
+            <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">12. Ingreso Mensual</h2><canvas id="ingresoChart"></canvas></div>
+        </main>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 9;
+
+        function showSlide(slideIndex) {
+            // Hide all slides first
+            for (let i = 0; i <= totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                if (slide) slide.classList.add('hidden');
+            }
+
+            // De-animate all modules
+            document.querySelectorAll('.animated-module').forEach(el => {
+                el.classList.remove('is-visible');
+            });
+
+            const currentSlideElement = document.getElementById(`slide-${slideIndex}`);
+            if (currentSlideElement) {
+                currentSlideElement.classList.remove('hidden');
+
+                // Animate modules in the current slide
+                const modules = currentSlideElement.querySelectorAll('.animated-module');
+                setTimeout(() => {
+                    modules.forEach(module => module.classList.add('is-visible'));
+                }, 50);
+            }
+
+            const navigation = document.getElementById('navigation');
+            if (slideIndex > 0 && slideIndex < totalSlides) {
+                navigation.classList.remove('hidden');
+            } else {
+                navigation.classList.add('hidden');
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function showFullDashboard() {
+            document.getElementById('presentation-container').classList.add('hidden');
+            document.getElementById('full-dashboard-container').classList.remove('hidden');
+            renderAllCharts();
+        }
+
+        function createBubbles() {
+            const bubbleContainer = document.getElementById('bubbles-bg');
+            if (!bubbleContainer) return;
+            const bubbleCount = 25;
+
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+
+                const size = Math.random() * 80 + 20; 
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 10;
+                const horizontalPosition = Math.random() * 100;
+
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${horizontalPosition}%`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+
+                bubbleContainer.appendChild(bubble);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createBubbles();
+            showSlide(currentSlide);
+
+            // --- DATOS Y CONFIGURACIÓN DE GRÁFICAS ---
+            const colorPalette = {
+                primaryBlue: 'rgba(59, 130, 246, 0.85)', vibrantPink: 'rgba(236, 72, 153, 0.85)',
+                sunnyYellow: 'rgba(245, 158, 11, 0.85)', emeraldGreen: 'rgba(16, 185, 129, 0.85)',
+                deepPurple: 'rgba(139, 92, 246, 0.85)', coolGray: 'rgba(107, 114, 128, 0.85)',
+            };
+            const simulatedData = {
+                situacion: { labels: ['No contrato, pero me interesa', 'Contrato ocasionalmente', 'No contrato y no me interesa', 'Contrato regularmente'], data: [107, 71, 36, 24] },
+                preocupacion: { labels: ['Confianza y seguridad', 'Calidad y consistencia', 'Precio del servicio', 'Puntualidad', 'Disponibilidad'], data: [119, 60, 24, 19, 16] },
+                factores: { labels: ['Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Seguro o respaldo legal', 'Precio competitivo'], data: [202, 190, 143, 131, 119] },
+                certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [110, 60, 40, 15, 8, 5] },
+                probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [90, 65, 45, 20, 10, 8] },
+                pago: { labels: ['Entre $201 y $300', 'Entre $301 y $400', 'Entre $150 y $200', 'Entre $401 y $500', 'Más de $500'], data: [83, 71, 36, 36, 12] },
+                frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2 o 3 veces por semana'], data: [95, 60, 48, 35] },
+                canal: { labels: ['Aplicación móvil (App)', 'Sitio web', 'WhatsApp', 'Llamada telefónica'], data: [107, 60, 48, 23] },
+                ciudad: { labels: ['Mérida', 'San Francisco de Campeche'], data: [155, 83] },
+                edad: { labels: ['25 - 34 años', '35 - 44 años', '45 - 55 años', 'Más de 55 años'], data: [95, 83, 48, 12] },
+                ocupacion: { labels: ['Empleado/a de oficina', 'Profesionista independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
+                ingreso: { labels: ['$25,001 - $40,000', 'Más de $40,000', '$15,001 - $25,000', 'Menos de $15,001'], data: [95, 83, 48, 12] }
+            };
+            const defaultChartOptions = {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { padding: 20, boxWidth: 15, font: { family: "'Inter', sans-serif" } } } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#e5e7eb' }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } },
+                    x: { grid: { display: false }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } }
+                }
+            };
+            const horizontalBarOptions = { ...defaultChartOptions, indexAxis: 'y' };
+            const doughnutOptions = { ...defaultChartOptions, scales: { x: { display: false }, y: { display: false } } };
+
+            function createChart(canvasId, type, data, options) {
+                const ctx = document.getElementById(canvasId);
+                if (ctx) new Chart(ctx, { type, data, options });
+            }
+
+            // --- RENDERIZADO DE GRÁFICAS PARA SLIDES ---
+            createChart('situacionActualChart_slide', 'doughnut', { labels: simulatedData.situacion.labels, datasets: [{ data: simulatedData.situacion.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.coolGray, colorPalette.emeraldGreen], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
+            createChart('preocupacionChart_slide', 'bar', { labels: simulatedData.preocupacion.labels, datasets: [{ label: 'Encuestados', data: simulatedData.preocupacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: {legend: {display: false}}, scales: { ...horizontalBarOptions.scales, y: { ...horizontalBarOptions.scales.y, ticks: { ...horizontalBarOptions.scales.y.ticks, callback: (v) => { const l = simulatedData.preocupacion.labels[v]; return l.length > 20 ? l.split(' ') : l; } } } } });
+            createChart('factoresChart_slide', 'bar', { labels: simulatedData.factores.labels, datasets: [{ label: 'Selecciones', data: simulatedData.factores.data, backgroundColor: colorPalette.emeraldGreen }] }, { ...defaultChartOptions, plugins: { legend: { display: false } }, scales: { ...defaultChartOptions.scales, x: { ...defaultChartOptions.scales.x, ticks: { ...defaultChartOptions.scales.x.ticks, callback: function(value) { const label = this.getLabelForValue(value); return label.length > 15 ? label.split(' ') : label; } } } } });
+            createChart('certificacionChart_slide', 'bar', { labels: simulatedData.certificacion.labels, datasets: [{ label: 'Respuestas', data: simulatedData.certificacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+            createChart('probabilidadChart_slide', 'bar', { labels: simulatedData.probabilidad.labels, datasets: [{ label: 'Respuestas', data: simulatedData.probabilidad.data, backgroundColor: colorPalette.vibrantPink }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+            createChart('pagoChart_slide', 'bar', { labels: simulatedData.pago.labels, datasets: [{ label: 'Encuestados', data: simulatedData.pago.data, backgroundColor: colorPalette.sunnyYellow }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+            createChart('canalChart_slide', 'pie', { labels: simulatedData.canal.labels, datasets: [{ data: simulatedData.canal.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.emeraldGreen, colorPalette.coolGray], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
+            createChart('edadChart_slide', 'bar', { labels: simulatedData.edad.labels, datasets: [{ label: 'Encuestados', data: simulatedData.edad.data, backgroundColor: colorPalette.deepPurple }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+            createChart('ingresoChart_slide', 'bar', { labels: simulatedData.ingreso.labels, datasets: [{ label: 'Encuestados', data: simulatedData.ingreso.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } } });
+
+        });
+        
+        function renderAllCharts() {
+            // Re-usar la configuración para el dashboard completo
+             const colorPalette = {
+                primaryBlue: 'rgba(59, 130, 246, 0.85)', vibrantPink: 'rgba(236, 72, 153, 0.85)',
+                sunnyYellow: 'rgba(245, 158, 11, 0.85)', emeraldGreen: 'rgba(16, 185, 129, 0.85)',
+                deepPurple: 'rgba(139, 92, 246, 0.85)', coolGray: 'rgba(107, 114, 128, 0.85)',
+            };
+            const simulatedData = {
+                situacion: { labels: ['No contrato, pero me interesa', 'Contrato ocasionalmente', 'No contrato y no me interesa', 'Contrato regularmente'], data: [107, 71, 36, 24] },
+                preocupacion: { labels: ['Confianza y seguridad', 'Calidad y consistencia', 'Precio del servicio', 'Puntualidad', 'Disponibilidad'], data: [119, 60, 24, 19, 16] },
+                factores: { labels: ['Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Seguro o respaldo legal', 'Precio competitivo'], data: [202, 190, 143, 131, 119] },
+                certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [110, 60, 40, 15, 8, 5] },
+                probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [90, 65, 45, 20, 10, 8] },
+                pago: { labels: ['Entre $201 y $300', 'Entre $301 y $400', 'Entre $150 y $200', 'Entre $401 y $500', 'Más de $500'], data: [83, 71, 36, 36, 12] },
+                frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2 o 3 veces por semana'], data: [95, 60, 48, 35] },
+                canal: { labels: ['Aplicación móvil (App)', 'Sitio web', 'WhatsApp', 'Llamada telefónica'], data: [107, 60, 48, 23] },
+                ciudad: { labels: ['Mérida', 'San Francisco de Campeche'], data: [155, 83] },
+                edad: { labels: ['25 - 34 años', '35 - 44 años', '45 - 55 años', 'Más de 55 años'], data: [95, 83, 48, 12] },
+                ocupacion: { labels: ['Empleado/a de oficina', 'Profesionista independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
+                ingreso: { labels: ['$25,001 - $40,000', 'Más de $40,000', '$15,001 - $25,000', 'Menos de $15,001'], data: [95, 83, 48, 12] }
+            };
+            const defaultChartOptions = {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { padding: 20, boxWidth: 15, font: { family: "'Inter', sans-serif" } } } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#e5e7eb' }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } },
+                    x: { grid: { display: false }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } }
+                }
+            };
+            const horizontalBarOptions = { ...defaultChartOptions, indexAxis: 'y' };
+            const doughnutOptions = { ...defaultChartOptions, scales: { x: { display: false }, y: { display: false } } };
+            function createChart(canvasId, type, data, options) {
+                const ctx = document.getElementById(canvasId);
+                if (Chart.getChart(ctx)) { Chart.getChart(ctx).destroy(); }
+                if (ctx) new Chart(ctx, { type, data, options });
+            }
+
+            createChart('situacionActualChart', 'doughnut', { labels: simulatedData.situacion.labels, datasets: [{ data: simulatedData.situacion.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.coolGray, colorPalette.emeraldGreen], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
+            createChart('preocupacionChart', 'bar', { labels: simulatedData.preocupacion.labels, datasets: [{ label: 'Encuestados', data: simulatedData.preocupacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: {legend: {display: false}}, scales: { ...horizontalBarOptions.scales, y: { ...horizontalBarOptions.scales.y, ticks: { ...horizontalBarOptions.scales.y.ticks, callback: (v) => { const l = simulatedData.preocupacion.labels[v]; return l.length > 20 ? l.split(' ') : l; } } } } });
+            createChart('factoresChart', 'bar', { labels: simulatedData.factores.labels, datasets: [{ label: 'Selecciones', data: simulatedData.factores.data, backgroundColor: colorPalette.emeraldGreen }] }, { ...defaultChartOptions, plugins: { legend: { display: false } }, scales: { ...defaultChartOptions.scales, x: { ...defaultChartOptions.scales.x, ticks: { ...defaultChartOptions.scales.x.ticks, callback: function(value) { const label = this.getLabelForValue(value); return label.length > 15 ? label.split(' ') : label; } } } } });
+            createChart('certificacionChart', 'bar', { labels: simulatedData.certificacion.labels, datasets: [{ label: 'Respuestas', data: simulatedData.certificacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...defaultChartOptions, plugins: { legend: { display: false } }, scales: {x: {title: {display: true, text:'Calificación'}}, y:{title: {display:true, text: 'Nº de Encuestados'}}} });
+            createChart('probabilidadChart', 'bar', { labels: simulatedData.probabilidad.labels, datasets: [{ label: 'Respuestas', data: simulatedData.probabilidad.data, backgroundColor: colorPalette.vibrantPink }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } }, scales: {x: {title: {display: true, text:'Nº de Encuestados'}}, y:{title: {display:true, text: 'Calificación'}}} });
+            createChart('pagoChart', 'bar', { labels: simulatedData.pago.labels, datasets: [{ label: 'Encuestados', data: simulatedData.pago.data, backgroundColor: colorPalette.sunnyYellow }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+            createChart('canalChart', 'pie', { labels: simulatedData.canal.labels, datasets: [{ data: simulatedData.canal.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.emeraldGreen, colorPalette.coolGray], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
+            createChart('frecuenciaChart', 'bar', { labels: simulatedData.frecuencia.labels, datasets: [{ label: 'Encuestados', data: simulatedData.frecuencia.data, backgroundColor: colorPalette.deepPurple }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } } });
+            createChart('edadChart', 'bar', { labels: simulatedData.edad.labels, datasets: [{ label: 'Encuestados', data: simulatedData.edad.data, backgroundColor: colorPalette.deepPurple }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+            createChart('ingresoChart', 'bar', { labels: simulatedData.ingreso.labels, datasets: [{ label: 'Encuestados', data: simulatedData.ingreso.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } } });
+            createChart('ciudadChart', 'doughnut', { labels: simulatedData.ciudad.labels, datasets: [{ data: simulatedData.ciudad.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
+            createChart('ocupacionChart', 'bar', { labels: simulatedData.ocupacion.labels, datasets: [{ label: 'Encuestados', data: simulatedData.ocupacion.data, backgroundColor: colorPalette.sunnyYellow }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+        }
+    </script>
+</body>
+</html>
+
