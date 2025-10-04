@@ -57,7 +57,7 @@
         .chart-card {
             background-color: rgba(17, 24, 39, 0.7);
             backdrop-filter: blur(12px);
-            padding: 2rem;
+            padding: 1.5rem; /* Reduced padding for mobile */
             border-radius: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -66,7 +66,7 @@
             font-weight: 500;
             margin-bottom: 1rem;
             text-align: center;
-            font-size: 1.125rem;
+            font-size: 1rem; /* Adjusted for mobile */
         }
         .slide {
             display: flex;
@@ -82,6 +82,7 @@
             visibility: hidden;
             transition: opacity 0.7s ease-in-out, visibility 0.7s;
             z-index: 10;
+            padding: 1rem;
         }
         .slide.active {
             opacity: 1;
@@ -89,12 +90,12 @@
         }
         .impact-text {
             color: #f0f6fc;
-            font-size: 2.25rem;
-            line-height: 2.75rem;
+            font-size: 1.5rem; /* Adjusted for mobile */
+            line-height: 2rem;
             font-weight: 700;
-            max-width: 800px;
+            max-width: 90%;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
         .chart-container-slide {
             width: 100%;
@@ -114,6 +115,20 @@
         .active .delay-1 {
             transition-delay: 0.25s;
         }
+
+        /* Desktop specific styles */
+        @media (min-width: 768px) {
+            .chart-title {
+                font-size: 1.125rem;
+            }
+            .impact-text {
+                font-size: 2.25rem;
+                line-height: 2.75rem;
+            }
+             .chart-card {
+                padding: 2rem;
+            }
+        }
     </style>
 </head>
 <body class="relative presentation-mode">
@@ -123,9 +138,9 @@
     <div id="presentation-container">
         <!-- Slide Controller -->
         <div id="slide-0" class="slide active">
-            <div class="text-center">
+            <div class="text-center p-4">
                 <h1 class="text-5xl md:text-6xl font-extrabold main-title animated-module">Validación de Negocio</h1>
-                <p class="text-slate-300 mt-4 text-3xl font-light animated-module delay-1">Ama de Llaves</p>
+                <p class="text-slate-300 mt-4 text-2xl md:text-3xl font-light animated-module delay-1">Ama de Llaves</p>
                 <div class="mt-12 animated-module delay-1" style="transition-delay: 0.4s;">
                      <button onclick="nextSlide()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all transform hover:scale-105 text-lg">
                         Comenzar
@@ -138,7 +153,7 @@
         <div id="slide-1" class="slide">
             <p class="impact-text animated-module">El mercado es más grande de lo que parece. <br>Casi la mitad de los hogares son clientes potenciales <span class="text-blue-500">esperando una solución.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-1 h-[35rem]">
+                <div class="chart-card xl:col-span-1 h-[36rem]">
                     <h2 class="chart-title">Situación Actual del Servicio de Limpieza</h2>
                     <canvas id="situacionActualChart_slide"></canvas>
                 </div>
@@ -148,7 +163,7 @@
         <div id="slide-2" class="slide">
             <p class="impact-text animated-module">La barrera de entrada no es el precio. <br>Es la <span class="text-blue-500">confianza.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[35rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Principal Preocupación al Contratar</h2>
                     <canvas id="preocupacionChart_slide"></canvas>
                 </div>
@@ -158,7 +173,7 @@
         <div id="slide-3" class="slide">
             <p class="impact-text animated-module">Lo que los clientes realmente valoran: <br><span class="text-blue-500">Seguridad</span> por encima de todo.</p>
             <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-3 h-[35rem]">
+                <div class="chart-card xl:col-span-3 h-[36rem]">
                     <h2 class="chart-title">Factores Clave en la Decisión</h2>
                     <canvas id="factoresChart_slide"></canvas>
                 </div>
@@ -168,7 +183,7 @@
         <div id="slide-4" class="slide">
             <p class="impact-text animated-module">La certificación no es una opción. <br>Para el mercado, es una <span class="text-blue-500">exigencia.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[35rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Importancia de la Certificación del Profesional</h2>
                     <canvas id="certificacionChart_slide"></canvas>
                 </div>
@@ -178,7 +193,7 @@
         <div id="slide-5" class="slide">
             <p class="impact-text animated-module">Cuando se resuelve la desconfianza, <br>la <span class="text-blue-500">intención de compra es casi unánime.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[35rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Probabilidad de Uso del Servicio</h2>
                     <canvas id="probabilidadChart_slide"></canvas>
                 </div>
@@ -188,7 +203,7 @@
         <div id="slide-6" class="slide">
             <p class="impact-text animated-module">El valor de la tranquilidad es claro. <br>La mayoría está dispuesta a <span class="text-blue-500">invertir en un servicio premium.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[35rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Disposición a Pagar por Hora (MXN)</h2>
                     <canvas id="pagoChart_slide"></canvas>
                 </div>
@@ -198,7 +213,7 @@
         <div id="slide-7" class="slide">
             <p class="impact-text animated-module">La experiencia debe ser impecable. <br>Y empieza en <span class="text-blue-500">la palma de su mano.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-1 h-[35rem]">
+                 <div class="chart-card xl:col-span-1 h-[36rem]">
                     <h2 class="chart-title">Canal Preferido para Gestionar Servicios</h2>
                     <canvas id="canalChart_slide"></canvas>
                 </div>
@@ -208,11 +223,11 @@
         <div id="slide-8" class="slide">
             <p class="impact-text animated-module">Conoce a nuestro cliente. <br>Joven, profesional y con <span class="text-blue-500">alto poder adquisitivo.</span></p>
             <div class="chart-container-slide grid md:grid-cols-2 gap-6">
-                 <div class="chart-card h-[30rem] animated-module delay-1">
+                 <div class="chart-card h-[32rem] animated-module delay-1">
                     <h2 class="chart-title">Rango de Edad</h2>
                     <canvas id="edadChart_slide"></canvas>
                 </div>
-                <div class="chart-card h-[30rem] animated-module delay-1" style="transition-delay: 0.4s;">
+                <div class="chart-card h-[32rem] animated-module delay-1" style="transition-delay: 0.4s;">
                     <h2 class="chart-title">Ingreso Mensual del Hogar</h2>
                     <canvas id="ingresoChart_slide"></canvas>
                 </div>
@@ -231,13 +246,13 @@
 
     <div id="full-dashboard-container" class="max-w-7xl mx-auto relative z-10 pb-12" style="display: none;">
         <!-- Header -->
-        <header class="text-center mb-8">
+        <header class="text-center mb-8 px-4">
             <h1 class="text-3xl md:text-4xl font-bold main-title">Dashboard de Encuesta de Mercado</h1>
             <p class="text-slate-400 mt-2 text-lg">Validación del Modelo de Negocio "Ama de Llaves" (Muestra: 238 Personas)</p>
         </header>
 
         <!-- KPIs Principales -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 px-4">
             <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
                 <h3 class="text-lg font-semibold text-slate-300">Principal Preocupación</h3>
                 <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">Confianza</p>
@@ -261,7 +276,7 @@
         </section>
 
         <!-- Grid de Gráficas -->
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4">
             <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">1. Situación Actual</h2><canvas id="situacionActualChart"></canvas></div>
             <div class="chart-card lg:col-span-2 h-[28rem]"><h2 class="chart-title">2. Principal Preocupación</h2><canvas id="preocupacionChart"></canvas></div>
             <div class="chart-card lg:col-span-3 h-[28rem]"><h2 class="chart-title">3. Factores Importantes</h2><canvas id="factoresChart"></canvas></div>
@@ -294,18 +309,18 @@
             accentOrange: 'rgba(251, 146, 60, 0.85)'
         };
         const simulatedData = {
-            situacion: { labels: ['No contrato, pero me interesa', 'Contrato ocasionalmente', 'No contrato y no me interesa', 'Contrato regularmente'], data: [107, 71, 36, 24] },
+            situacion: { labels: ['Interesado', 'Ocasional', 'No interesado', 'Regular'], data: [107, 71, 36, 24] },
             preocupacion: { labels: ['Confianza y seguridad', 'Calidad y consistencia', 'Precio del servicio', 'Puntualidad', 'Disponibilidad'], data: [119, 60, 24, 19, 16] },
             factores: { labels: ['Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Seguro o respaldo legal', 'Precio competitivo'], data: [202, 190, 143, 131, 119] },
             certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [110, 60, 40, 15, 8, 5] },
             probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [90, 65, 45, 20, 10, 8] },
             pago: { labels: ['Entre $201 y $300', 'Entre $301 y $400', 'Entre $150 y $200', 'Entre $401 y $500', 'Más de $500'], data: [83, 71, 36, 36, 12] },
-            frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2 o 3 veces por semana'], data: [95, 60, 48, 35] },
-            canal: { labels: ['Aplicación móvil (App)', 'Sitio web', 'WhatsApp', 'Llamada telefónica'], data: [107, 60, 48, 23] },
-            ciudad: { labels: ['Mérida', 'San Francisco de Campeche'], data: [155, 83] },
-            edad: { labels: ['25 - 34 años', '35 - 44 años', '45 - 55 años', 'Más de 55 años'], data: [95, 83, 48, 12] },
-            ocupacion: { labels: ['Empleado/a de oficina', 'Profesionista independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
-            ingreso: { labels: ['$25,001 - $40,000', 'Más de $40,000', '$15,001 - $25,000', 'Menos de $15,001'], data: [95, 83, 48, 12] }
+            frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2-3/semana'], data: [95, 60, 48, 35] },
+            canal: { labels: ['App Móvil', 'Sitio Web', 'WhatsApp', 'Llamada'], data: [107, 60, 48, 23] },
+            ciudad: { labels: ['Mérida', 'San Fco. de Campeche'], data: [155, 83] },
+            edad: { labels: ['25 - 34', '35 - 44', '45 - 55', '> 55'], data: [95, 83, 48, 12] },
+            ocupacion: { labels: ['Oficina', 'Independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
+            ingreso: { labels: ['$25k - $40k', '>$40k', '$15k - $25k', '<$15k'], data: [95, 83, 48, 12] }
         };
         
         // --- Dark Mode Chart Config ---
@@ -331,7 +346,23 @@
             },
             scales: {
                 y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: tickColor, font: fontConfig } },
-                x: { grid: { display: false }, ticks: { color: tickColor, font: fontConfig, autoSkip: false } }
+                x: { 
+                    grid: { display: false }, 
+                    ticks: { 
+                        color: tickColor, 
+                        font: fontConfig, 
+                        autoSkip: false,
+                        maxRotation: 0,
+                        minRotation: 0,
+                        callback: function(value) {
+                            const label = this.getLabelForValue(value);
+                            if (typeof label === 'string' && label.length > 20) {
+                                return label.split(' ');
+                            }
+                            return label;
+                        }
+                    } 
+                }
             }
         };
         const horizontalBarOptions = { ...defaultChartOptions, indexAxis: 'y' };
@@ -420,14 +451,14 @@
         
             window.addEventListener('wheel', (event) => {
                 if (document.body.classList.contains('presentation-mode')) {
-                    event.preventDefault();
+                    // event.preventDefault(); // This can be too aggressive
                     if (event.deltaY > 0) {
                         nextSlide();
                     } else {
                         prevSlide();
                     }
                 }
-            }, { passive: false });
+            }, { passive: true }); // Use passive for better scroll performance on some devices
 
             window.addEventListener('keydown', (event) => {
                 if (document.body.classList.contains('presentation-mode')) {
@@ -439,7 +470,7 @@
                 }
             });
 
-            window.addEventListener('touchstart', (e) => { touchStartY = e.changedTouches[0].screenY; }, false);
+            window.addEventListener('touchstart', (e) => { touchStartY = e.changedTouches[0].screenY; }, { passive: true });
             window.addEventListener('touchend', (e) => {
                 let touchEndY = e.changedTouches[0].screenY;
                 if (document.body.classList.contains('presentation-mode')) {
@@ -449,7 +480,7 @@
                         prevSlide();
                     }
                 }
-            }, false);
+            }, { passive: true });
         });
         
         function renderAllCharts() {
