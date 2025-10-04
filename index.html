@@ -227,12 +227,6 @@
                 </button>
             </div>
         </div>
-
-        <!-- Navigation Buttons -->
-        <div id="navigation" class="fixed bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-20" style="opacity: 0; visibility: hidden; transition: opacity 0.5s;">
-            <button onclick="prevSlide()" class="bg-gray-700/50 hover:bg-gray-600/50 backdrop-blur-sm text-slate-200 font-semibold py-2 px-6 rounded-full shadow-md transition-all transform hover:scale-105">Anterior</button>
-            <button onclick="nextSlide()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all transform hover:scale-105">Siguiente</button>
-        </div>
     </div>
 
     <div id="full-dashboard-container" class="max-w-7xl mx-auto relative z-10 pb-12" style="display: none;">
@@ -287,6 +281,8 @@
         let currentSlide = 0;
         const totalSlides = 9;
         let slideChartInstances = {};
+        let isNavigating = false;
+        const navigationCooldown = 1000; // 1 second cooldown
 
         const colorPalette = {
             primaryBlue: 'rgba(59, 130, 246, 0.85)',
@@ -339,29 +335,26 @@
                 currentSlideElement.classList.add('active');
                 createChartsForSlide(slideIndex);
             }
-
-            const navigation = document.getElementById('navigation');
-            if (slideIndex > 0 && slideIndex < totalSlides) {
-                navigation.style.opacity = '1';
-                navigation.style.visibility = 'visible';
-            } else {
-                navigation.style.opacity = '0';
-                navigation.style.visibility = 'hidden';
-            }
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
+            if (isNavigating || currentSlide >= totalSlides) return;
+            isNavigating = true;
+
+            currentSlide++;
+            showSlide(currentSlide);
+
+            setTimeout(() => { isNavigating = false; }, navigationCooldown);
         }
 
         function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
+            if (isNavigating || currentSlide <= 0) return;
+            isNavigating = true;
+            
+            currentSlide--;
+            showSlide(currentSlide);
+
+            setTimeout(() => { isNavigating = false; }, navigationCooldown);
         }
 
         function showFullDashboard() {
@@ -413,6 +406,27 @@
         
         document.addEventListener('DOMContentLoaded', () => {
             showSlide(currentSlide);
+        
+            window.addEventListener('wheel', (event) => {
+                if (document.body.classList.contains('presentation-mode')) {
+                    event.preventDefault();
+                    if (event.deltaY > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }, { passive: false });
+
+            window.addEventListener('keydown', (event) => {
+                if (document.body.classList.contains('presentation-mode')) {
+                    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+                        nextSlide();
+                    } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+                        prevSlide();
+                    }
+                }
+            });
         });
         
         function renderAllCharts() {
