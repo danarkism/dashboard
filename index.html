@@ -69,7 +69,7 @@
         .animated-module {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.75s ease-out, transform 0.75s ease-out;
         }
         .animated-module.is-visible {
             opacity: 1;
@@ -135,7 +135,7 @@
         <div id="slide-1" class="slide hidden">
             <p class="impact-text animated-module">Existe un gigante dormido. Casi la mitad del mercado no contrata servicios de limpieza, pero está <span class="text-blue-500">activamente buscándolos.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-1 h-[26rem]">
+                <div class="chart-card xl:col-span-1 h-[32rem]">
                     <h2 class="chart-title">1. Situación Actual del Servicio de Limpieza</h2>
                     <canvas id="situacionActualChart_slide"></canvas>
                 </div>
@@ -145,7 +145,7 @@
         <div id="slide-2" class="slide hidden">
             <p class="impact-text animated-module">El problema no es la limpieza. Es el miedo. La principal barrera para el 50% de los clientes es una pregunta: <span class="text-blue-500">¿En quién puedo confiar?</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[26rem]">
+                 <div class="chart-card xl:col-span-2 h-[32rem]">
                     <h2 class="chart-title">2. Principal Preocupación al Contratar</h2>
                     <canvas id="preocupacionChart_slide"></canvas>
                 </div>
@@ -155,7 +155,7 @@
         <div id="slide-3" class="slide hidden">
             <p class="impact-text animated-module">Los clientes no compran un servicio, <span class="text-blue-500">compran tranquilidad.</span> La verificación de antecedentes supera por mucho al precio como factor de decisión.</p>
             <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-3 h-[26rem]">
+                <div class="chart-card xl:col-span-3 h-[32rem]">
                     <h2 class="chart-title">3. Factores Clave en la Decisión</h2>
                     <canvas id="factoresChart_slide"></canvas>
                 </div>
@@ -165,7 +165,7 @@
         <div id="slide-4" class="slide hidden">
             <p class="impact-text animated-module">La certificación no es un 'extra', <span class="text-blue-500">es el requisito fundamental.</span> La demanda por profesionales verificados es abrumadora.</p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[28rem]">
+                 <div class="chart-card xl:col-span-2 h-[32rem]">
                     <h2 class="chart-title">4. Importancia de la Certificación del Profesional (1-10)</h2>
                     <canvas id="certificacionChart_slide"></canvas>
                 </div>
@@ -175,7 +175,7 @@
         <div id="slide-5" class="slide hidden">
             <p class="impact-text animated-module">Cuando la confianza está garantizada, la intención de compra se dispara. El mercado <span class="text-blue-500">está listo para actuar.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[28rem]">
+                 <div class="chart-card xl:col-span-2 h-[32rem]">
                     <h2 class="chart-title">5. Probabilidad de Uso del Servicio (1-10)</h2>
                     <canvas id="probabilidadChart_slide"></canvas>
                 </div>
@@ -185,7 +185,7 @@
         <div id="slide-6" class="slide hidden">
             <p class="impact-text animated-module">La confianza tiene un precio, y el mercado está dispuesto a pagarlo. Un <span class="text-blue-500">70% pagaría una tarifa premium</span> por un servicio seguro y de calidad.</p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[28rem]">
+                 <div class="chart-card xl:col-span-2 h-[32rem]">
                     <h2 class="chart-title">6. Disposición a Pagar por Hora (MXN)</h2>
                     <canvas id="pagoChart_slide"></canvas>
                 </div>
@@ -195,7 +195,7 @@
         <div id="slide-7" class="slide hidden">
             <p class="impact-text animated-module">La conveniencia es la nueva lealtad. La gran mayoría quiere la solución <span class="text-blue-500">en la palma de su mano.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-1 h-[26rem]">
+                 <div class="chart-card xl:col-span-1 h-[32rem]">
                     <h2 class="chart-title">8. Canal Preferido para Gestionar Servicios</h2>
                     <canvas id="canalChart_slide"></canvas>
                 </div>
@@ -205,11 +205,11 @@
         <div id="slide-8" class="slide hidden">
             <p class="impact-text animated-module">Nuestro cliente no es un nicho. Es la fuerza económica emergente: profesionales que <span class="text-blue-500">valoran su tiempo más que su dinero.</span></p>
             <div class="chart-container-slide grid md:grid-cols-2 gap-6">
-                 <div class="chart-card h-[26rem] animated-module delay-1">
+                 <div class="chart-card h-[30rem] animated-module delay-1">
                     <h2 class="chart-title">10. Rango de Edad</h2>
                     <canvas id="edadChart_slide"></canvas>
                 </div>
-                <div class="chart-card h-[26rem] animated-module delay-1" style="transition-delay: 0.4s;">
+                <div class="chart-card h-[30rem] animated-module delay-1" style="transition-delay: 0.4s;">
                     <h2 class="chart-title">12. Ingreso Mensual del Hogar</h2>
                     <canvas id="ingresoChart_slide"></canvas>
                 </div>
@@ -283,15 +283,47 @@
     <script>
         let currentSlide = 0;
         const totalSlides = 9;
+        let slideChartInstances = {};
+
+        const colorPalette = {
+            primaryBlue: 'rgba(59, 130, 246, 0.85)', vibrantPink: 'rgba(236, 72, 153, 0.85)',
+            sunnyYellow: 'rgba(245, 158, 11, 0.85)', emeraldGreen: 'rgba(16, 185, 129, 0.85)',
+            deepPurple: 'rgba(139, 92, 246, 0.85)', coolGray: 'rgba(107, 114, 128, 0.85)',
+        };
+        const simulatedData = {
+            situacion: { labels: ['No contrato, pero me interesa', 'Contrato ocasionalmente', 'No contrato y no me interesa', 'Contrato regularmente'], data: [107, 71, 36, 24] },
+            preocupacion: { labels: ['Confianza y seguridad', 'Calidad y consistencia', 'Precio del servicio', 'Puntualidad', 'Disponibilidad'], data: [119, 60, 24, 19, 16] },
+            factores: { labels: ['Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Seguro o respaldo legal', 'Precio competitivo'], data: [202, 190, 143, 131, 119] },
+            certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [110, 60, 40, 15, 8, 5] },
+            probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [90, 65, 45, 20, 10, 8] },
+            pago: { labels: ['Entre $201 y $300', 'Entre $301 y $400', 'Entre $150 y $200', 'Entre $401 y $500', 'Más de $500'], data: [83, 71, 36, 36, 12] },
+            frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2 o 3 veces por semana'], data: [95, 60, 48, 35] },
+            canal: { labels: ['Aplicación móvil (App)', 'Sitio web', 'WhatsApp', 'Llamada telefónica'], data: [107, 60, 48, 23] },
+            ciudad: { labels: ['Mérida', 'San Francisco de Campeche'], data: [155, 83] },
+            edad: { labels: ['25 - 34 años', '35 - 44 años', '45 - 55 años', 'Más de 55 años'], data: [95, 83, 48, 12] },
+            ocupacion: { labels: ['Empleado/a de oficina', 'Profesionista independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
+            ingreso: { labels: ['$25,001 - $40,000', 'Más de $40,000', '$15,001 - $25,000', 'Menos de $15,001'], data: [95, 83, 48, 12] }
+        };
+        const defaultChartOptions = {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { padding: 20, boxWidth: 15, font: { family: "'Inter', sans-serif" } } } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#e5e7eb' }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } },
+                x: { grid: { display: false }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } }
+            }
+        };
+        const horizontalBarOptions = { ...defaultChartOptions, indexAxis: 'y' };
+        const doughnutOptions = { ...defaultChartOptions, scales: { x: { display: false }, y: { display: false } } };
 
         function showSlide(slideIndex) {
-            // Hide all slides first
             for (let i = 0; i <= totalSlides; i++) {
                 const slide = document.getElementById(`slide-${i}`);
                 if (slide) slide.classList.add('hidden');
             }
 
-            // De-animate all modules
+            Object.values(slideChartInstances).forEach(chart => chart.destroy());
+            slideChartInstances = {};
+
             document.querySelectorAll('.animated-module').forEach(el => {
                 el.classList.remove('is-visible');
             });
@@ -300,11 +332,12 @@
             if (currentSlideElement) {
                 currentSlideElement.classList.remove('hidden');
 
-                // Animate modules in the current slide
                 const modules = currentSlideElement.querySelectorAll('.animated-module');
                 setTimeout(() => {
                     modules.forEach(module => module.classList.add('is-visible'));
                 }, 50);
+
+                createChartsForSlide(slideIndex);
             }
 
             const navigation = document.getElementById('navigation');
@@ -339,110 +372,65 @@
             const bubbleContainer = document.getElementById('bubbles-bg');
             if (!bubbleContainer) return;
             const bubbleCount = 25;
-
             for (let i = 0; i < bubbleCount; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
-
-                const size = Math.random() * 80 + 20; 
+                const size = Math.random() * 80 + 20;
                 const duration = Math.random() * 20 + 15;
                 const delay = Math.random() * 10;
                 const horizontalPosition = Math.random() * 100;
-
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
                 bubble.style.left = `${horizontalPosition}%`;
                 bubble.style.animationDuration = `${duration}s`;
                 bubble.style.animationDelay = `${delay}s`;
-
                 bubbleContainer.appendChild(bubble);
+            }
+        }
+
+        function createAndStoreChart(canvasId, type, data, options) {
+            const ctx = document.getElementById(canvasId);
+            if (ctx) {
+                slideChartInstances[canvasId] = new Chart(ctx, { type, data, options });
+            }
+        }
+
+        function createChartsForSlide(slideIndex) {
+            switch (slideIndex) {
+                case 1:
+                    createAndStoreChart('situacionActualChart_slide', 'doughnut', { labels: simulatedData.situacion.labels, datasets: [{ data: simulatedData.situacion.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.coolGray, colorPalette.emeraldGreen], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
+                    break;
+                case 2:
+                    createAndStoreChart('preocupacionChart_slide', 'bar', { labels: simulatedData.preocupacion.labels, datasets: [{ label: 'Encuestados', data: simulatedData.preocupacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } }, scales: { ...horizontalBarOptions.scales, y: { ...horizontalBarOptions.scales.y, ticks: { ...horizontalBarOptions.scales.y.ticks, callback: (v) => { const l = simulatedData.preocupacion.labels[v]; return l.length > 20 ? l.split(' ') : l; } } } } });
+                    break;
+                case 3:
+                    createAndStoreChart('factoresChart_slide', 'bar', { labels: simulatedData.factores.labels, datasets: [{ label: 'Selecciones', data: simulatedData.factores.data, backgroundColor: colorPalette.emeraldGreen }] }, { ...defaultChartOptions, plugins: { legend: { display: false } }, scales: { ...defaultChartOptions.scales, x: { ...defaultChartOptions.scales.x, ticks: { ...defaultChartOptions.scales.x.ticks, callback: function(value) { const label = this.getLabelForValue(value); return label.length > 15 ? label.split(' ') : label; } } } } });
+                    break;
+                case 4:
+                    createAndStoreChart('certificacionChart_slide', 'bar', { labels: simulatedData.certificacion.labels, datasets: [{ label: 'Respuestas', data: simulatedData.certificacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+                    break;
+                case 5:
+                    createAndStoreChart('probabilidadChart_slide', 'bar', { labels: simulatedData.probabilidad.labels, datasets: [{ label: 'Respuestas', data: simulatedData.probabilidad.data, backgroundColor: colorPalette.vibrantPink }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+                    break;
+                case 6:
+                    createAndStoreChart('pagoChart_slide', 'bar', { labels: simulatedData.pago.labels, datasets: [{ label: 'Encuestados', data: simulatedData.pago.data, backgroundColor: colorPalette.sunnyYellow }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+                    break;
+                case 7:
+                    createAndStoreChart('canalChart_slide', 'pie', { labels: simulatedData.canal.labels, datasets: [{ data: simulatedData.canal.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.emeraldGreen, colorPalette.coolGray], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
+                    break;
+                case 8:
+                    createAndStoreChart('edadChart_slide', 'bar', { labels: simulatedData.edad.labels, datasets: [{ label: 'Encuestados', data: simulatedData.edad.data, backgroundColor: colorPalette.deepPurple }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+                    createAndStoreChart('ingresoChart_slide', 'bar', { labels: simulatedData.ingreso.labels, datasets: [{ label: 'Encuestados', data: simulatedData.ingreso.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } } });
+                    break;
             }
         }
         
         document.addEventListener('DOMContentLoaded', () => {
             createBubbles();
             showSlide(currentSlide);
-
-            // --- DATOS Y CONFIGURACIÓN DE GRÁFICAS ---
-            const colorPalette = {
-                primaryBlue: 'rgba(59, 130, 246, 0.85)', vibrantPink: 'rgba(236, 72, 153, 0.85)',
-                sunnyYellow: 'rgba(245, 158, 11, 0.85)', emeraldGreen: 'rgba(16, 185, 129, 0.85)',
-                deepPurple: 'rgba(139, 92, 246, 0.85)', coolGray: 'rgba(107, 114, 128, 0.85)',
-            };
-            const simulatedData = {
-                situacion: { labels: ['No contrato, pero me interesa', 'Contrato ocasionalmente', 'No contrato y no me interesa', 'Contrato regularmente'], data: [107, 71, 36, 24] },
-                preocupacion: { labels: ['Confianza y seguridad', 'Calidad y consistencia', 'Precio del servicio', 'Puntualidad', 'Disponibilidad'], data: [119, 60, 24, 19, 16] },
-                factores: { labels: ['Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Seguro o respaldo legal', 'Precio competitivo'], data: [202, 190, 143, 131, 119] },
-                certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [110, 60, 40, 15, 8, 5] },
-                probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [90, 65, 45, 20, 10, 8] },
-                pago: { labels: ['Entre $201 y $300', 'Entre $301 y $400', 'Entre $150 y $200', 'Entre $401 y $500', 'Más de $500'], data: [83, 71, 36, 36, 12] },
-                frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2 o 3 veces por semana'], data: [95, 60, 48, 35] },
-                canal: { labels: ['Aplicación móvil (App)', 'Sitio web', 'WhatsApp', 'Llamada telefónica'], data: [107, 60, 48, 23] },
-                ciudad: { labels: ['Mérida', 'San Francisco de Campeche'], data: [155, 83] },
-                edad: { labels: ['25 - 34 años', '35 - 44 años', '45 - 55 años', 'Más de 55 años'], data: [95, 83, 48, 12] },
-                ocupacion: { labels: ['Empleado/a de oficina', 'Profesionista independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
-                ingreso: { labels: ['$25,001 - $40,000', 'Más de $40,000', '$15,001 - $25,000', 'Menos de $15,001'], data: [95, 83, 48, 12] }
-            };
-            const defaultChartOptions = {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom', labels: { padding: 20, boxWidth: 15, font: { family: "'Inter', sans-serif" } } } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#e5e7eb' }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } },
-                    x: { grid: { display: false }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } }
-                }
-            };
-            const horizontalBarOptions = { ...defaultChartOptions, indexAxis: 'y' };
-            const doughnutOptions = { ...defaultChartOptions, scales: { x: { display: false }, y: { display: false } } };
-
-            function createChart(canvasId, type, data, options) {
-                const ctx = document.getElementById(canvasId);
-                if (ctx) new Chart(ctx, { type, data, options });
-            }
-
-            // --- RENDERIZADO DE GRÁFICAS PARA SLIDES ---
-            createChart('situacionActualChart_slide', 'doughnut', { labels: simulatedData.situacion.labels, datasets: [{ data: simulatedData.situacion.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.coolGray, colorPalette.emeraldGreen], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
-            createChart('preocupacionChart_slide', 'bar', { labels: simulatedData.preocupacion.labels, datasets: [{ label: 'Encuestados', data: simulatedData.preocupacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: {legend: {display: false}}, scales: { ...horizontalBarOptions.scales, y: { ...horizontalBarOptions.scales.y, ticks: { ...horizontalBarOptions.scales.y.ticks, callback: (v) => { const l = simulatedData.preocupacion.labels[v]; return l.length > 20 ? l.split(' ') : l; } } } } });
-            createChart('factoresChart_slide', 'bar', { labels: simulatedData.factores.labels, datasets: [{ label: 'Selecciones', data: simulatedData.factores.data, backgroundColor: colorPalette.emeraldGreen }] }, { ...defaultChartOptions, plugins: { legend: { display: false } }, scales: { ...defaultChartOptions.scales, x: { ...defaultChartOptions.scales.x, ticks: { ...defaultChartOptions.scales.x.ticks, callback: function(value) { const label = this.getLabelForValue(value); return label.length > 15 ? label.split(' ') : label; } } } } });
-            createChart('certificacionChart_slide', 'bar', { labels: simulatedData.certificacion.labels, datasets: [{ label: 'Respuestas', data: simulatedData.certificacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
-            createChart('probabilidadChart_slide', 'bar', { labels: simulatedData.probabilidad.labels, datasets: [{ label: 'Respuestas', data: simulatedData.probabilidad.data, backgroundColor: colorPalette.vibrantPink }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
-            createChart('pagoChart_slide', 'bar', { labels: simulatedData.pago.labels, datasets: [{ label: 'Encuestados', data: simulatedData.pago.data, backgroundColor: colorPalette.sunnyYellow }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
-            createChart('canalChart_slide', 'pie', { labels: simulatedData.canal.labels, datasets: [{ data: simulatedData.canal.data, backgroundColor: [colorPalette.vibrantPink, colorPalette.primaryBlue, colorPalette.emeraldGreen, colorPalette.coolGray], borderColor: '#ffffff', borderWidth: 4 }] }, doughnutOptions);
-            createChart('edadChart_slide', 'bar', { labels: simulatedData.edad.labels, datasets: [{ label: 'Encuestados', data: simulatedData.edad.data, backgroundColor: colorPalette.deepPurple }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
-            createChart('ingresoChart_slide', 'bar', { labels: simulatedData.ingreso.labels, datasets: [{ label: 'Encuestados', data: simulatedData.ingreso.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } } });
-
         });
         
         function renderAllCharts() {
-            // Re-usar la configuración para el dashboard completo
-             const colorPalette = {
-                primaryBlue: 'rgba(59, 130, 246, 0.85)', vibrantPink: 'rgba(236, 72, 153, 0.85)',
-                sunnyYellow: 'rgba(245, 158, 11, 0.85)', emeraldGreen: 'rgba(16, 185, 129, 0.85)',
-                deepPurple: 'rgba(139, 92, 246, 0.85)', coolGray: 'rgba(107, 114, 128, 0.85)',
-            };
-            const simulatedData = {
-                situacion: { labels: ['No contrato, pero me interesa', 'Contrato ocasionalmente', 'No contrato y no me interesa', 'Contrato regularmente'], data: [107, 71, 36, 24] },
-                preocupacion: { labels: ['Confianza y seguridad', 'Calidad y consistencia', 'Precio del servicio', 'Puntualidad', 'Disponibilidad'], data: [119, 60, 24, 19, 16] },
-                factores: { labels: ['Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Seguro o respaldo legal', 'Precio competitivo'], data: [202, 190, 143, 131, 119] },
-                certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [110, 60, 40, 15, 8, 5] },
-                probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [90, 65, 45, 20, 10, 8] },
-                pago: { labels: ['Entre $201 y $300', 'Entre $301 y $400', 'Entre $150 y $200', 'Entre $401 y $500', 'Más de $500'], data: [83, 71, 36, 36, 12] },
-                frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2 o 3 veces por semana'], data: [95, 60, 48, 35] },
-                canal: { labels: ['Aplicación móvil (App)', 'Sitio web', 'WhatsApp', 'Llamada telefónica'], data: [107, 60, 48, 23] },
-                ciudad: { labels: ['Mérida', 'San Francisco de Campeche'], data: [155, 83] },
-                edad: { labels: ['25 - 34 años', '35 - 44 años', '45 - 55 años', 'Más de 55 años'], data: [95, 83, 48, 12] },
-                ocupacion: { labels: ['Empleado/a de oficina', 'Profesionista independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
-                ingreso: { labels: ['$25,001 - $40,000', 'Más de $40,000', '$15,001 - $25,000', 'Menos de $15,001'], data: [95, 83, 48, 12] }
-            };
-            const defaultChartOptions = {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom', labels: { padding: 20, boxWidth: 15, font: { family: "'Inter', sans-serif" } } } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#e5e7eb' }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } },
-                    x: { grid: { display: false }, ticks: { font: { family: "'Inter', sans-serif", size: 11 } } }
-                }
-            };
-            const horizontalBarOptions = { ...defaultChartOptions, indexAxis: 'y' };
-            const doughnutOptions = { ...defaultChartOptions, scales: { x: { display: false }, y: { display: false } } };
             function createChart(canvasId, type, data, options) {
                 const ctx = document.getElementById(canvasId);
                 if (Chart.getChart(ctx)) { Chart.getChart(ctx).destroy(); }
