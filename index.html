@@ -153,7 +153,7 @@
         <div id="slide-1" class="slide">
             <p class="impact-text animated-module">El mercado es más grande de lo que parece. <br>Casi la mitad de los hogares son clientes potenciales <span class="text-blue-500">esperando una solución.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-1 h-[38rem]">
+                <div class="chart-card xl:col-span-1 h-[36rem]">
                     <h2 class="chart-title">Situación Actual del Servicio de Limpieza</h2>
                     <canvas id="situacionActualChart_slide"></canvas>
                 </div>
@@ -163,7 +163,7 @@
         <div id="slide-2" class="slide">
             <p class="impact-text animated-module">La barrera de entrada no es el precio. <br>Es la <span class="text-blue-500">confianza.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[38rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Principal Preocupación al Contratar</h2>
                     <canvas id="preocupacionChart_slide"></canvas>
                 </div>
@@ -173,7 +173,7 @@
         <div id="slide-3" class="slide">
             <p class="impact-text animated-module">Lo que los clientes realmente valoran: <br><span class="text-blue-500">Seguridad</span> por encima de todo.</p>
             <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-3 h-[38rem]">
+                <div class="chart-card xl:col-span-3 h-[36rem]">
                     <h2 class="chart-title">Factores Clave en la Decisión</h2>
                     <canvas id="factoresChart_slide"></canvas>
                 </div>
@@ -183,7 +183,7 @@
         <div id="slide-4" class="slide">
             <p class="impact-text animated-module">La certificación no es una opción. <br>Para el mercado, es una <span class="text-blue-500">exigencia.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[38rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Importancia de la Certificación del Profesional</h2>
                     <canvas id="certificacionChart_slide"></canvas>
                 </div>
@@ -193,7 +193,7 @@
         <div id="slide-5" class="slide">
             <p class="impact-text animated-module">Cuando se resuelve la desconfianza, <br>la <span class="text-blue-500">intención de compra es casi unánime.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[38rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Probabilidad de Uso del Servicio</h2>
                     <canvas id="probabilidadChart_slide"></canvas>
                 </div>
@@ -203,7 +203,7 @@
         <div id="slide-6" class="slide">
             <p class="impact-text animated-module">El valor de la tranquilidad es claro. <br>La mayoría está dispuesta a <span class="text-blue-500">invertir en un servicio premium.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-2 h-[38rem]">
+                 <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Disposición a Pagar por Hora (MXN)</h2>
                     <canvas id="pagoChart_slide"></canvas>
                 </div>
@@ -213,7 +213,7 @@
         <div id="slide-7" class="slide">
             <p class="impact-text animated-module">La experiencia debe ser impecable. <br>Y empieza en <span class="text-blue-500">la palma de su mano.</span></p>
             <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-1 h-[38rem]">
+                 <div class="chart-card xl:col-span-1 h-[36rem]">
                     <h2 class="chart-title">Canal Preferido para Gestionar Servicios</h2>
                     <canvas id="canalChart_slide"></canvas>
                 </div>
@@ -334,6 +334,11 @@
 
         const defaultChartOptions = {
             responsive: true, maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    bottom: 20 // This is the key fix for the bottom margin
+                }
+            },
             plugins: { 
                 legend: { 
                     position: 'bottom', 
