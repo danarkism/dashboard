@@ -115,6 +115,27 @@
         .active .delay-1 {
             transition-delay: 0.25s;
         }
+        .active .delay-2 {
+            transition-delay: 0.5s;
+        }
+
+        /* App Store & Google Play Button Styles */
+        .app-store-button, .storeLink {
+            display: inline-block;
+            transition: transform 0.2s ease-in-out;
+        }
+        .app-store-button:hover, .storeLink:hover {
+            transform: scale(1.05);
+        }
+        .app-store-button img {
+            height: 48px; 
+            width: auto;
+        }
+        .storeLink img {
+             height: 52px; /* Slightly larger for visual balance */
+             width: auto;
+        }
+
 
         /* Desktop specific styles */
         @media (min-width: 768px) {
@@ -127,6 +148,12 @@
             }
              .chart-card {
                 padding: 2rem;
+            }
+             .app-store-button img {
+                height: 56px;
+            }
+             .storeLink img {
+                height: 60px; /* Slightly larger for visual balance */
             }
         }
     </style>
@@ -181,7 +208,7 @@
         </div>
 
         <div id="slide-4" class="slide">
-            <p class="impact-text animated-module">La certificación no es una opción. <br>Para el mercado, es una <span class="text-blue-500">exigencia.</span></p>
+            <p class="impact-text animated-module">La confianza no se improvisa. <br>Se <span class="text-blue-500">certifica.</span></p>
             <div class="chart-container-slide animated-module delay-1">
                  <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Importancia de la Certificación del Profesional</h2>
@@ -201,7 +228,7 @@
         </div>
 
         <div id="slide-6" class="slide">
-            <p class="impact-text animated-module">El valor de la tranquilidad es claro. <br>La mayoría está dispuesta a <span class="text-blue-500">invertir en un servicio premium.</span></p>
+            <p class="impact-text animated-module">El valor de la confianza. <br>Reflejado en los <span class="text-blue-500">datos.</span></p>
             <div class="chart-container-slide animated-module delay-1">
                  <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Disposición a Pagar por Hora (MXN)</h2>
@@ -221,7 +248,7 @@
         </div>
 
         <div id="slide-8" class="slide">
-            <p class="impact-text animated-module">Conoce a nuestro cliente. <br>Joven, profesional y con <span class="text-blue-500">alto poder adquisitivo.</span></p>
+             <p class="impact-text animated-module">Conoce a nuestro cliente. <br>Para quienes su <span class="text-blue-500">tiempo</span> es el activo más valioso.</p>
             <div class="chart-container-slide grid md:grid-cols-2 gap-6">
                  <div class="chart-card h-[32rem] animated-module delay-1">
                     <h2 class="chart-title">Rango de Edad</h2>
@@ -236,9 +263,29 @@
 
         <div id="slide-9" class="slide">
             <p class="impact-text animated-module">Los datos son claros. <br>La oportunidad es <span class="text-blue-500">innegable.</span></p>
-             <div class="text-center animated-module delay-1">
-                <button onclick="showFullDashboard()" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all transform hover:scale-105 text-lg">
-                    Ver Resumen
+        </div>
+
+        <div id="slide-10" class="slide">
+            <div class="text-center">
+                <p class="text-slate-400 text-2xl font-light animated-module">Y esto es solo el comienzo.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-100 mt-4 animated-module delay-1">Próximamente.</h2>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mt-10 animated-module delay-2">
+                    <!-- App Store Button -->
+                    <a href="https://apps.apple.com/app/idYOUR_APP_ID" target="_blank" rel="noopener noreferrer" class="app-store-button">
+                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" />
+                    </a>
+                    <!-- Google Play Button -->
+                    <a href="https://play.google.com/store/apps/details?id=your.app.id" class="storeLink" target="_blank" rel="noopener noreferrer">
+                         <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-11" class="slide">
+             <div class="text-center animated-module">
+                <button onclick="showFullDashboard()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all transform hover:scale-105 text-lg">
+                    Ver Resumen de Datos
                 </button>
             </div>
         </div>
@@ -260,12 +307,12 @@
             </div>
             <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
                 <h3 class="text-lg font-semibold text-slate-300">Importancia de Certificación</h3>
-                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">8.9 / 10</p>
+                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">7.8 / 10</p>
                 <p class="text-slate-400 text-sm mt-1">(Calificación Promedio)</p>
             </div>
             <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
                 <h3 class="text-lg font-semibold text-slate-300">Probabilidad de Uso</h3>
-                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">8.7 / 10</p>
+                <p class="text-2xl md:text-3xl font-bold kpi-value mt-2">8.2 / 10</p>
                 <p class="text-slate-400 text-sm mt-1">(Calificación Promedio)</p>
             </div>
             <div class="kpi-card p-6 flex flex-col items-center justify-center text-center">
@@ -294,7 +341,7 @@
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 9;
+        const totalSlides = 11;
         let slideChartInstances = {};
         let isNavigating = false;
         const navigationCooldown = 1000; // 1 second cooldown
@@ -310,17 +357,17 @@
         };
         const simulatedData = {
             situacion: { labels: ['Interesado', 'Ocasional', 'No interesado', 'Regular'], data: [107, 71, 36, 24] },
-            preocupacion: { labels: ['Confianza y seguridad', 'Calidad y consistencia', 'Precio del servicio', 'Puntualidad', 'Disponibilidad'], data: [119, 60, 24, 19, 16] },
-            factores: { labels: ['Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Seguro o respaldo legal', 'Precio competitivo'], data: [202, 190, 143, 131, 119] },
-            certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [110, 60, 40, 15, 8, 5] },
-            probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [90, 65, 45, 20, 10, 8] },
+            preocupacion: { labels: ['Confianza y seguridad', 'Puntualidad', 'Calidad y consistencia', 'Precio del servicio', 'Disponibilidad'], data: [119, 70, 30, 10, 9] },
+            factores: { labels: ['Seguro o respaldo legal', 'Verificación de antecedentes', 'Garantía de alta calidad', 'Facilidad para agendar', 'Precio competitivo'], data: [210, 202, 190, 143, 119] },
+            certificacion: { labels: ['10', '9', '8', '7', '6', '5'], data: [40, 25, 50, 110, 8, 5] },
+            probabilidad: { labels: ['10', '9', '8', '7', '6', '5'], data: [40, 30, 80, 70, 10, 8] },
             pago: { labels: ['Entre $201 y $300', 'Entre $301 y $400', 'Entre $150 y $200', 'Entre $401 y $500', 'Más de $500'], data: [83, 71, 36, 36, 12] },
-            frecuencia: { labels: ['Quincenalmente', 'Semanalmente', 'Mensualmente', '2-3/semana'], data: [95, 60, 48, 35] },
-            canal: { labels: ['App Móvil', 'Sitio Web', 'WhatsApp', 'Llamada'], data: [107, 60, 48, 23] },
+            frecuencia: { labels: ['Quincenalmente', 'Mensualmente', 'Semanalmente', '2-3/semana'], data: [95, 60, 48, 35] },
+            canal: { labels: ['App Móvil', 'WhatsApp', 'Sitio Web', 'Llamada'], data: [107, 70, 40, 21] },
             ciudad: { labels: ['Mérida', 'San Fco. de Campeche'], data: [155, 83] },
             edad: { labels: ['25 - 34', '35 - 44', '45 - 55', '> 55'], data: [95, 83, 48, 12] },
             ocupacion: { labels: ['Oficina', 'Independiente', 'Empresario/a', 'Otro'], data: [83, 71, 48, 36] },
-            ingreso: { labels: ['$25k - $40k', '>$40k', '$15k - $25k', '<$15k'], data: [95, 83, 48, 12] }
+            ingreso: { labels: ['$15k - $25k', '<$15k', '$25k - $40k', '>$40k'], data: [95, 65, 48, 30] }
         };
         
         // --- Dark Mode Chart Config ---
