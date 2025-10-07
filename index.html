@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentación de Dashboard: Ama de Llaves</title>
+    <title>Presentación de Negocio: Ama de Llaves</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,6 +146,9 @@
         .active .delay-2 {
             transition-delay: 0.5s;
         }
+        .active .delay-3 {
+            transition-delay: 0.75s;
+        }
 
         /* App Store & Google Play Button Styles */
         .app-store-button, .storeLink {
@@ -187,32 +190,61 @@
 
 
     <div id="presentation-container">
-        <!-- Slide Controller -->
+        <!-- Slide 0: Concept -->
         <div id="slide-0" class="slide active">
-            <div class="text-center p-4">
-                <h1 class="text-5xl md:text-6xl font-extrabold text-slate-100 animated-module">El placer de volver a casa.</h1>
-                <p class="main-title mt-4 text-2xl md:text-3xl font-light animated-module delay-1">Ama de Llaves</p>
-                <div class="mt-12 animated-module delay-1" style="transition-delay: 0.4s;">
+            <div class="text-center p-4 max-w-4xl">
+                <h1 class="text-5xl md:text-6xl font-bold text-slate-100 animated-module">Ama de Llaves.</h1>
+                <div class="mt-8 text-slate-300 text-lg md:text-xl space-y-6">
+                    <p class="animated-module delay-1">1. Guardiana del santuario del hogar; profesional que cultiva la armonía, el orden y la tranquilidad en los espacios más íntimos.</p>
+                    <p class="animated-module delay-2">2. Persona cuyo servicio experto y de confianza transforma una casa en un verdadero hogar.</p>
+                </div>
+                 <div class="mt-12 animated-module delay-3">
                      <button onclick="nextSlide()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all transform hover:scale-105 text-lg">
-                        Descubre por qué
+                        Comenzar
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Slides de Gráficas -->
+        <!-- Slide 1: Mission -->
         <div id="slide-1" class="slide">
-            <p class="impact-text animated-module">Aquí es donde todo comienza. <br>Un mercado que espera una <span class="text-blue-500">mejor solución.</span></p>
-            <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-1 h-[36rem]">
-                    <h2 class="chart-title">Situación Actual del Servicio de Limpieza</h2>
-                    <canvas id="situacionActualChart_slide"></canvas>
-                </div>
+            <div class="text-center max-w-4xl">
+                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestra Misión.</span></h2>
+                <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">Redefinir el estándar de excelencia y confianza en el cuidado del hogar, empoderando a una nueva generación de mujeres profesionales.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Vision -->
+        <div id="slide-2" class="slide">
+            <div class="text-center max-w-4xl">
+                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestra Visión.</span></h2>
+                <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">Convertirnos en el sello de confianza indispensable para los hogares en la península de Yucatán.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Values -->
+        <div id="slide-3" class="slide">
+             <div class="text-center max-w-4xl">
+                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestros Valores.</span></h2>
+                <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">La Confianza es la Llave. La Dignidad es Autoridad. La Excelencia es el Mínimo. La Discreción es Respeto.</p>
             </div>
         </div>
 
-        <div id="slide-2" class="slide">
-            <p class="impact-text animated-module">La barrera de entrada no es el precio. <br>Es la <span class="text-blue-500">confianza.</span></p>
+        <!-- Slide 4: How we change the market -->
+        <div id="slide-4" class="slide">
+             <p class="impact-text animated-module">El mercado está listo para evolucionar.<br>Presentamos la <span class="text-blue-500">primera plataforma digital</span> para el cuidado del hogar en la Península de Yucatán.</p>
+             <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">Reemplazamos la informalidad con certificación, la inconsistencia con tecnología y la incertidumbre con total confianza.</p>
+        </div>
+
+        <!-- Slide 5: Methodology -->
+        <div id="slide-5" class="slide">
+            <p class="impact-text animated-module">Así que decidimos preguntar. <br><span class="text-blue-500">Escuchamos al mercado.</span></p>
+            <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">Realizamos una encuesta a 238 clientes potenciales en Mérida y Campeche para entender sus verdaderas necesidades y validar nuestra hipótesis.</p>
+        </div>
+
+        <!-- Slide 6: The Core Problem -->
+        <div id="slide-6" class="slide">
+            <p class="impact-text animated-module">Esto es lo que descubrimos. <br>El problema no es la limpieza. Es la <span class="text-blue-500">incertidumbre.</span></p>
             <div class="chart-container-slide animated-module delay-1">
                  <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Principal Preocupación al Contratar</h2>
@@ -221,8 +253,9 @@
             </div>
         </div>
         
-        <div id="slide-3" class="slide">
-            <p class="impact-text animated-module">Lo que los clientes realmente valoran: <br><span class="text-blue-500">Seguridad</span> por encima de todo.</p>
+        <!-- Slide 7: The Core Value -->
+        <div id="slide-7" class="slide">
+            <p class="impact-text animated-module">Cuando la incertidumbre es el problema, <br>la <span class="text-blue-500">seguridad</span> se vuelve el activo más valioso.</p>
             <div class="chart-container-slide animated-module delay-1">
                 <div class="chart-card xl:col-span-3 h-[36rem]">
                     <h2 class="chart-title">Factores Clave en la Decisión</h2>
@@ -230,9 +263,10 @@
                 </div>
             </div>
         </div>
-
-        <div id="slide-4" class="slide">
-            <p class="impact-text animated-module">La confianza no se improvisa. <br>Se <span class="text-blue-500">certifica.</span></p>
+        
+        <!-- Slide 8: Validating the Solution -->
+        <div id="slide-8" class="slide">
+             <p class="impact-text animated-module">La confianza no se improvisa. <br>Se <span class="text-blue-500">certifica.</span></p>
             <div class="chart-container-slide animated-module delay-1">
                  <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Importancia de la Certificación del Profesional</h2>
@@ -241,8 +275,9 @@
             </div>
         </div>
 
-        <div id="slide-5" class="slide">
-            <p class="impact-text animated-module">Cuando se resuelve la desconfianza, <br>la <span class="text-blue-500">intención de compra es casi unánime.</span></p>
+        <!-- Slide 9: Market Response -->
+        <div id="slide-9" class="slide">
+            <p class="impact-text animated-module">Y cuando se garantiza la confianza, <br>el mercado <span class="text-blue-500">responde.</span></p>
             <div class="chart-container-slide animated-module delay-1">
                  <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Probabilidad de Uso del Servicio</h2>
@@ -250,9 +285,10 @@
                 </div>
             </div>
         </div>
-
-        <div id="slide-6" class="slide">
-            <p class="impact-text animated-module">El valor de la confianza. <br>Reflejado en los <span class="text-blue-500">datos.</span></p>
+        
+        <!-- Slide 10: The Value -->
+        <div id="slide-10" class="slide">
+            <p class="impact-text animated-module">El valor de la tranquilidad. <br>Reflejado en los <span class="text-blue-500">datos.</span></p>
             <div class="chart-container-slide animated-module delay-1">
                  <div class="chart-card xl:col-span-2 h-[36rem]">
                     <h2 class="chart-title">Disposición a Pagar por Hora (MXN)</h2>
@@ -261,17 +297,8 @@
             </div>
         </div>
         
-        <div id="slide-7" class="slide">
-            <p class="impact-text animated-module">La experiencia debe ser impecable. <br>Y empieza en <span class="text-blue-500">la palma de su mano.</span></p>
-            <div class="chart-container-slide animated-module delay-1">
-                 <div class="chart-card xl:col-span-1 h-[36rem]">
-                    <h2 class="chart-title">Canal Preferido para Gestionar Servicios</h2>
-                    <canvas id="canalChart_slide"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div id="slide-8" class="slide">
+        <!-- Slide 11: The Customer -->
+        <div id="slide-11" class="slide">
              <p class="impact-text animated-module">Conoce a nuestro cliente. <br>Para quienes su <span class="text-blue-500">tiempo</span> es el activo más valioso.</p>
             <div class="chart-container-slide grid md:grid-cols-2 gap-6">
                  <div class="chart-card h-[32rem] animated-module delay-1">
@@ -284,12 +311,48 @@
                 </div>
             </div>
         </div>
-
-        <div id="slide-9" class="slide">
-            <p class="impact-text animated-module">Los datos son claros. <br>La oportunidad es <span class="text-blue-500">innegable.</span></p>
+        
+        <!-- Slide 12: SWOT -->
+        <div id="slide-12" class="slide">
+             <p class="impact-text animated-module">Nuestro Panorama <span class="text-blue-500">Estratégico.</span></p>
+             <div class="grid grid-cols-2 gap-6 max-w-4xl w-full text-slate-300 animated-module delay-1">
+                <div class="p-4 border border-slate-700 rounded-lg">
+                    <h3 class="font-bold text-lg text-green-400 mb-2">Fortalezas</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Marca y concepto diferenciados</li>
+                        <li>Modelo de certificación como barrera de entrada</li>
+                        <li>Mercado dispuesto a pagar precios premium</li>
+                    </ul>
+                </div>
+                 <div class="p-4 border border-slate-700 rounded-lg">
+                    <h3 class="font-bold text-lg text-blue-400 mb-2">Oportunidades</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Crecimiento de +300% en demanda digital</li>
+                        <li>74.8% del mercado disponible para captar</li>
+                        <li>Preferencia por canales digitales (App/WhatsApp)</li>
+                    </ul>
+                </div>
+                 <div class="p-4 border border-slate-700 rounded-lg">
+                    <h3 class="font-bold text-lg text-yellow-400 mb-2">Debilidades</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Marca nueva sin reconocimiento</li>
+                        <li>Alta inversión inicial requerida</li>
+                        <li>Proceso de reclutamiento intensivo</li>
+                    </ul>
+                </div>
+                 <div class="p-4 border border-slate-700 rounded-lg">
+                    <h3 class="font-bold text-lg text-red-400 mb-2">Amenazas</h3>
+                    <ul class="list-disc list-inside text-sm space-y-1">
+                        <li>Fuerte competencia informal</li>
+                        <li>Plataformas nacionales establecidas</li>
+                        <li>Sensibilidad al precio en ciertos segmentos</li>
+                    </ul>
+                </div>
+             </div>
         </div>
 
-        <div id="slide-10" class="slide">
+        <!-- Slide 13: The Future -->
+        <div id="slide-13" class="slide">
             <div class="text-center">
                 <p class="text-slate-400 text-2xl font-light animated-module">Y esto es solo el comienzo.</p>
                 <h2 class="text-4xl md:text-5xl font-bold text-slate-100 mt-4 animated-module delay-1">Próximamente.</h2>
@@ -306,7 +369,8 @@
             </div>
         </div>
 
-        <div id="slide-11" class="slide">
+        <!-- Slide 14: CTA -->
+        <div id="slide-14" class="slide">
              <div class="text-center animated-module">
                 <button onclick="showFullDashboard()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition-all transform hover:scale-105 text-lg">
                     Explora los datos
@@ -361,15 +425,17 @@
             <div class="chart-card lg:col-span-2 h-[28rem]"><h2 class="chart-title">11. Ocupación Principal</h2><canvas id="ocupacionChart"></canvas></div>
             <div class="chart-card lg:col-span-1 h-[28rem]"><h2 class="chart-title">12. Ingreso Mensual</h2><canvas id="ingresoChart"></canvas></div>
         </main>
+        
     </div>
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 11;
+        const totalSlides = 14;
         let slideChartInstances = {};
         let isNavigating = false;
         const navigationCooldown = 1000; // 1 second cooldown
         let touchStartY = 0;
+        const TOTAL_RESPONDENTS = 238;
 
         const colorPalette = {
             primaryBlue: 'rgba(59, 130, 246, 0.85)',
@@ -407,7 +473,7 @@
             responsive: true, maintainAspectRatio: false,
             layout: {
                 padding: {
-                    bottom: 20 // This is the key fix for the bottom margin
+                    bottom: 20 
                 }
             },
             plugins: { 
@@ -418,6 +484,21 @@
                         boxWidth: 12,
                         font: legendFontConfig
                     } 
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const percentage = ((value / TOTAL_RESPONDENTS) * 100).toFixed(1);
+                            
+                            if (context.chart.canvas.id.includes('factoresChart')) {
+                                return `${context.label}: ${value} selecciones (${percentage}% de encuestados)`;
+                            }
+                            
+                            const label = context.dataset.label || context.label || '';
+                            return `${label}: ${value} (${percentage}%)`;
+                        }
+                    }
                 } 
             },
             scales: {
@@ -451,7 +532,9 @@
             const currentSlideElement = document.getElementById(`slide-${slideIndex}`);
             if (currentSlideElement) {
                 currentSlideElement.classList.add('active');
-                createChartsForSlide(slideIndex);
+                 setTimeout(() => {
+                    createChartsForSlide(slideIndex);
+                }, 50); // Small delay to ensure animations trigger
             }
              // Handle background gradient transition
             const gradients = document.querySelectorAll('.background-gradient');
@@ -499,29 +582,23 @@
 
         function createChartsForSlide(slideIndex) {
             switch (slideIndex) {
-                case 1:
-                    createAndStoreChart('situacionActualChart_slide', 'doughnut', { labels: simulatedData.situacion.labels, datasets: [{ data: simulatedData.situacion.data, backgroundColor: [colorPalette.primaryBlue, colorPalette.accentCyan, colorPalette.accentGray, colorPalette.accentGreen], borderColor: '#0d1117', borderWidth: 5 }] }, doughnutOptions);
-                    break;
-                case 2:
+                case 6:
                     createAndStoreChart('preocupacionChart_slide', 'bar', { labels: simulatedData.preocupacion.labels, datasets: [{ label: 'Encuestados', data: simulatedData.preocupacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } } });
                     break;
-                case 3:
+                case 7:
                     createAndStoreChart('factoresChart_slide', 'bar', { labels: simulatedData.factores.labels, datasets: [{ label: 'Selecciones', data: simulatedData.factores.data, backgroundColor: colorPalette.accentGreen }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
                     break;
-                case 4:
+                case 8:
                     createAndStoreChart('certificacionChart_slide', 'bar', { labels: simulatedData.certificacion.labels, datasets: [{ label: 'Respuestas', data: simulatedData.certificacion.data, backgroundColor: colorPalette.primaryBlue }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
                     break;
-                case 5:
+                case 9:
                     createAndStoreChart('probabilidadChart_slide', 'bar', { labels: simulatedData.probabilidad.labels, datasets: [{ label: 'Respuestas', data: simulatedData.probabilidad.data, backgroundColor: colorPalette.accentIndigo }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
                     break;
-                case 6:
+                case 10:
                     createAndStoreChart('pagoChart_slide', 'bar', { labels: simulatedData.pago.labels, datasets: [{ label: 'Encuestados', data: simulatedData.pago.data, backgroundColor: colorPalette.accentOrange }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
                     break;
-                case 7:
-                    createAndStoreChart('canalChart_slide', 'pie', { labels: simulatedData.canal.labels, datasets: [{ data: simulatedData.canal.data, backgroundColor: [colorPalette.primaryBlue, colorPalette.accentCyan, colorPalette.accentIndigo, colorPalette.accentGray], borderColor: '#0d1117', borderWidth: 5 }] }, doughnutOptions);
-                    break;
-                case 8:
-                    createAndStoreChart('edadChart_slide', 'bar', { labels: simulatedData.edad.labels, datasets: [{ label: 'Encuestados', data: simulatedData.edad.data, backgroundColor: colorPalette.accentIndigo }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
+                case 11:
+                     createAndStoreChart('edadChart_slide', 'bar', { labels: simulatedData.edad.labels, datasets: [{ label: 'Encuestados', data: simulatedData.edad.data, backgroundColor: colorPalette.accentIndigo }] }, { ...defaultChartOptions, plugins: { legend: { display: false } } });
                     createAndStoreChart('ingresoChart_slide', 'bar', { labels: simulatedData.ingreso.labels, datasets: [{ label: 'Encuestados', data: simulatedData.ingreso.data, backgroundColor: colorPalette.primaryBlue }] }, { ...horizontalBarOptions, plugins: { legend: { display: false } } });
                     break;
             }
