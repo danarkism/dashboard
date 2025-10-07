@@ -35,7 +35,7 @@
         #background-gradient-1 {
             background-image: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1), transparent 40%),
                               radial-gradient(circle at 80% 90%, rgba(139, 92, 246, 0.1), transparent 40%);
-            animation: pan-1 30s ease-in-out infinite alternate;
+            animation: pan-1 20s ease-in-out infinite alternate;
         }
 
         #background-gradient-2 {
@@ -96,45 +96,35 @@
             text-align: center;
             font-size: 1rem; /* Adjusted for mobile */
         }
-            .slide {
-              display: flex;
-              flex-direction: column;
-              align-items: center;  /* ✅ Centra horizontalmente el contenido */
-              justify-content: center; /* ✅ Centra verticalmente */
-              min-height: 100vh;
-              width: 100vw;
-              position: absolute;
-              top: 0;
-              left: 0;
-              opacity: 0;
-              visibility: hidden;
-              transition: opacity 0.7s ease-in-out, visibility 0.7s;
-              z-index: 10;
-              padding: 1rem;
-            }
-            
-            .slide.active {
-              opacity: 1;
-              visibility: visible;
-            }
-            .impact-text {
-              color: #f0f6fc;
-              font-size: 1.5rem;
-              line-height: 2.2rem;
-              font-weight: 700;
-              text-align: center;
-              margin: 0 auto 2rem auto;
-              width: 100%;           /* ✅ que use todo el ancho */
-              max-width: none;       /* ✅ elimina el límite */
-              white-space: normal;   /* ✅ permite <br> funcionar normalmente */
-              word-break: keep-all;  /* ✅ no corte palabras */
-            }
-            .impact-text span {
-              display: inline-block;
-              width: 100%;  /* ✅ Asegura que el span también se centre */
-              text-align: center;
-            }
-
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.7s ease-in-out, visibility 0.7s;
+            z-index: 10;
+            padding: 1rem;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .impact-text {
+            color: #f0f6fc;
+            font-size: 1.5rem; /* Adjusted for mobile */
+            line-height: 2rem;
+            font-weight: 700;
+            max-width: 90%;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
         .chart-container-slide {
             width: 100%;
             max-width: 900px;
@@ -179,15 +169,10 @@
             .chart-title {
                 font-size: 1.125rem;
             }
-.impact-text {
-  color: #f0f6fc;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-  text-align: center;
-  margin: 0 auto 2rem auto;
-  max-width: 32ch; /* ✅ controla mejor el ancho de línea */
-}
+            .impact-text {
+                font-size: 2.25rem;
+                line-height: 2.75rem;
+            }
              .chart-card {
                 padding: 2rem;
             }
@@ -221,41 +206,30 @@
             </div>
         </div>
 
-      <!-- Slide 1: Misión -->
-<div id="slide-1" class="slide">
-  <div class="max-w-4xl text-center">
-    <h2 class="impact-text animated-module text-center">
-      <span class="text-blue-500">Nuestra Misión.</span>
-    </h2>
-    <p class="text-slate-300 text-xl max-w-3xl mx-auto animated-module delay-1">
-      Redefinir el estándar de excelencia y confianza en el cuidado del hogar, empoderando a una nueva generación de mujeres profesionales.
-    </p>
-  </div>
-</div>
+        <!-- Slide 1: Mission -->
+        <div id="slide-1" class="slide">
+            <div class="text-center max-w-4xl w-full px-4">
+                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestra Misión.</span></h2>
+                <p class="text-slate-300 text-xl max-w-3xl mx-auto text-center animated-module delay-1">Redefinir el estándar de excelencia y confianza en el cuidado del hogar, empoderando a una nueva generación de mujeres profesionales.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Vision -->
+        <div id="slide-2" class="slide">
+            <div class="text-center max-w-4xl w-full px-4">
+                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestra Visión.</span></h2>
+                <p class="text-slate-300 text-xl max-w-3xl mx-auto text-center animated-module delay-1">Convertirnos en el sello de confianza indispensable para los hogares en la península de Yucatán.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Values -->
+        <div id="slide-3" class="slide">
+             <div class="text-center max-w-4xl w-full px-4">
+                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestros Valores.</span></h2>
+                <p class="text-slate-300 text-xl max-w-3xl mx-auto text-center animated-module delay-1">La Confianza es la Llave. La Dignidad es Autoridad. La Excelencia es el Mínimo. La Discreción es Respeto.</p>
+            </div>
+        </div>
 
-<!-- Slide 2: Visión -->
-<div id="slide-2" class="slide">
-  <div class="max-w-4xl text-center">
-    <h2 class="impact-text animated-module text-center">
-      <span class="text-blue-500">Nuestra Visión.</span>
-    </h2>
-    <p class="text-slate-300 text-xl max-w-3xl mx-auto animated-module delay-1">
-      Convertirnos en el sello de confianza indispensable para los hogares en la península de Yucatán.
-    </p>
-  </div>
-</div>
-
-<!-- Slide 3: Valores -->
-<div id="slide-3" class="slide">
-  <div class="max-w-4xl text-center">
-    <h2 class="impact-text animated-module text-center">
-      <span class="text-blue-500">Nuestros Valores.</span>
-    </h2>
-    <p class="text-slate-300 text-xl max-w-3xl mx-auto animated-module delay-1">
-      La Confianza es la Llave. La Dignidad es Autoridad. La Excelencia es el Mínimo. La Discreción es Respeto.
-    </p>
-  </div>
-</div>
         <!-- Slide 4: How we change the market -->
         <div id="slide-4" class="slide">
              <p class="impact-text animated-module">El mercado está listo para evolucionar.<br>Presentamos la <span class="text-blue-500">primera plataforma digital</span> para el cuidado del hogar en la Península de Yucatán.</p>
@@ -280,13 +254,14 @@
         </div>
         
         <!-- Slide 7: The Core Value -->
-        <div id="slide-x" class="slide">
-          <div class="text-center w-full">
-            <p class="impact-text animated-module">
-              Cuando la incertidumbre es el problema,<br>
-              la <span class="text-blue-500 whitespace-nowrap">seguridad</span> se vuelve el activo más valioso.
-            </p>
-          </div>
+        <div id="slide-7" class="slide">
+            <p class="impact-text animated-module">Cuando la incertidumbre es el problema, <br>la <span class="text-blue-500">seguridad</span> se vuelve el activo más valioso.</p>
+            <div class="chart-container-slide animated-module delay-1">
+                <div class="chart-card xl:col-span-3 h-[36rem]">
+                    <h2 class="chart-title">Factores Clave en la Decisión</h2>
+                    <canvas id="factoresChart_slide"></canvas>
+                </div>
+            </div>
         </div>
         
         <!-- Slide 8: Validating the Solution -->
@@ -689,4 +664,3 @@
     </script>
 </body>
 </html>
-
