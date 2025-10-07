@@ -96,35 +96,44 @@
             text-align: center;
             font-size: 1rem; /* Adjusted for mobile */
         }
-        .slide {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            width: 100vw;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.7s ease-in-out, visibility 0.7s;
-            z-index: 10;
-            padding: 1rem;
-        }
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .impact-text {
-            color: #f0f6fc;
-            font-size: 1.5rem; /* Adjusted for mobile */
-            line-height: 2rem;
-            font-weight: 700;
-            max-width: 90%;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+            .slide {
+              display: flex;
+              flex-direction: column;
+              align-items: center;  /* ✅ Centra horizontalmente el contenido */
+              justify-content: center; /* ✅ Centra verticalmente */
+              min-height: 100vh;
+              width: 100vw;
+              position: absolute;
+              top: 0;
+              left: 0;
+              opacity: 0;
+              visibility: hidden;
+              transition: opacity 0.7s ease-in-out, visibility 0.7s;
+              z-index: 10;
+              padding: 1rem;
+            }
+            
+            .slide.active {
+              opacity: 1;
+              visibility: visible;
+            }
+            
+            .impact-text {
+              color: #f0f6fc;
+              font-size: 1.5rem;
+              line-height: 2rem;
+              font-weight: 700;
+              text-align: center;  /* ✅ Centra el texto */
+              margin: 0 auto 2rem auto; /* ✅ Centra el bloque */
+              max-width: 90%;
+            }
+            
+            .impact-text span {
+              display: inline-block;
+              width: 100%;  /* ✅ Asegura que el span también se centre */
+              text-align: center;
+            }
+
         .chart-container-slide {
             width: 100%;
             max-width: 900px;
@@ -206,30 +215,41 @@
             </div>
         </div>
 
-        <!-- Slide 1: Mission -->
-        <div id="slide-1" class="slide">
-            <div class="text-center max-w-4xl">
-                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestra Misión.</span></h2>
-                <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">Redefinir el estándar de excelencia y confianza en el cuidado del hogar, empoderando a una nueva generación de mujeres profesionales.</p>
-            </div>
-        </div>
-        
-        <!-- Slide 2: Vision -->
-        <div id="slide-2" class="slide">
-            <div class="text-center max-w-4xl">
-                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestra Visión.</span></h2>
-                <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">Convertirnos en el sello de confianza indispensable para los hogares en la península de Yucatán.</p>
-            </div>
-        </div>
-        
-        <!-- Slide 3: Values -->
-        <div id="slide-3" class="slide">
-             <div class="text-center max-w-4xl">
-                <h2 class="impact-text animated-module"><span class="text-blue-500">Nuestros Valores.</span></h2>
-                <p class="text-slate-300 text-xl max-w-3xl text-center animated-module delay-1">La Confianza es la Llave. La Dignidad es Autoridad. La Excelencia es el Mínimo. La Discreción es Respeto.</p>
-            </div>
-        </div>
+      <!-- Slide 1: Misión -->
+<div id="slide-1" class="slide">
+  <div class="max-w-4xl text-center">
+    <h2 class="impact-text animated-module text-center">
+      <span class="text-blue-500">Nuestra Misión.</span>
+    </h2>
+    <p class="text-slate-300 text-xl max-w-3xl mx-auto animated-module delay-1">
+      Redefinir el estándar de excelencia y confianza en el cuidado del hogar, empoderando a una nueva generación de mujeres profesionales.
+    </p>
+  </div>
+</div>
 
+<!-- Slide 2: Visión -->
+<div id="slide-2" class="slide">
+  <div class="max-w-4xl text-center">
+    <h2 class="impact-text animated-module text-center">
+      <span class="text-blue-500">Nuestra Visión.</span>
+    </h2>
+    <p class="text-slate-300 text-xl max-w-3xl mx-auto animated-module delay-1">
+      Convertirnos en el sello de confianza indispensable para los hogares en la península de Yucatán.
+    </p>
+  </div>
+</div>
+
+<!-- Slide 3: Valores -->
+<div id="slide-3" class="slide">
+  <div class="max-w-4xl text-center">
+    <h2 class="impact-text animated-module text-center">
+      <span class="text-blue-500">Nuestros Valores.</span>
+    </h2>
+    <p class="text-slate-300 text-xl max-w-3xl mx-auto animated-module delay-1">
+      La Confianza es la Llave. La Dignidad es Autoridad. La Excelencia es el Mínimo. La Discreción es Respeto.
+    </p>
+  </div>
+</div>
         <!-- Slide 4: How we change the market -->
         <div id="slide-4" class="slide">
              <p class="impact-text animated-module">El mercado está listo para evolucionar.<br>Presentamos la <span class="text-blue-500">primera plataforma digital</span> para el cuidado del hogar en la Península de Yucatán.</p>
