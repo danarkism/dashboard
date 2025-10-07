@@ -117,17 +117,17 @@
               opacity: 1;
               visibility: visible;
             }
-            
-            .impact-text {
-              color: #f0f6fc;
-              font-size: 1.5rem;
-              line-height: 2rem;
-              font-weight: 700;
-              text-align: center;  /* ✅ Centra el texto */
-              margin: 0 auto 2rem auto; /* ✅ Centra el bloque */
-              max-width: 90%;
-            }
-            
+                .impact-text {
+                  color: #f0f6fc;
+                  font-size: 1.5rem;
+                  line-height: 2.2rem;
+                  font-weight: 700;
+                  text-align: center;
+                  margin: 0 auto 2rem auto;
+                  max-width: 60ch; /* ✅ limita el ancho por caracteres, no por % */
+                  word-break: keep-all; /* ✅ evita cortes de palabras raros */
+                  white-space: normal; /* ✅ deja que los <br> sí funcionen */
+                } 
             .impact-text span {
               display: inline-block;
               width: 100%;  /* ✅ Asegura que el span también se centre */
