@@ -117,17 +117,18 @@
               opacity: 1;
               visibility: visible;
             }
-                .impact-text {
-                  color: #f0f6fc;
-                  font-size: 1.5rem;
-                  line-height: 2.2rem;
-                  font-weight: 700;
-                  text-align: center;
-                  margin: 0 auto 2rem auto;
-                  max-width: 60ch; /* ✅ limita el ancho por caracteres, no por % */
-                  word-break: keep-all; /* ✅ evita cortes de palabras raros */
-                  white-space: normal; /* ✅ deja que los <br> sí funcionen */
-                } 
+            .impact-text {
+              color: #f0f6fc;
+              font-size: 1.5rem;
+              line-height: 2.2rem;
+              font-weight: 700;
+              text-align: center;
+              margin: 0 auto 2rem auto;
+              width: 100%;           /* ✅ que use todo el ancho */
+              max-width: none;       /* ✅ elimina el límite */
+              white-space: normal;   /* ✅ permite <br> funcionar normalmente */
+              word-break: keep-all;  /* ✅ no corte palabras */
+            }
             .impact-text span {
               display: inline-block;
               width: 100%;  /* ✅ Asegura que el span también se centre */
@@ -279,14 +280,13 @@
         </div>
         
         <!-- Slide 7: The Core Value -->
-        <div id="slide-7" class="slide">
-            <p class="impact-text animated-module">Cuando la incertidumbre es el problema, <br>la <span class="text-blue-500">seguridad</span> se vuelve el activo más valioso.</p>
-            <div class="chart-container-slide animated-module delay-1">
-                <div class="chart-card xl:col-span-3 h-[36rem]">
-                    <h2 class="chart-title">Factores Clave en la Decisión</h2>
-                    <canvas id="factoresChart_slide"></canvas>
-                </div>
-            </div>
+        <div id="slide-x" class="slide">
+          <div class="text-center w-full">
+            <p class="impact-text animated-module">
+              Cuando la incertidumbre es el problema,<br>
+              la <span class="text-blue-500 whitespace-nowrap">seguridad</span> se vuelve el activo más valioso.
+            </p>
+          </div>
         </div>
         
         <!-- Slide 8: Validating the Solution -->
